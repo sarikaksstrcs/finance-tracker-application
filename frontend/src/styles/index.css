@@ -201,6 +201,125 @@ button:disabled {
   margin-bottom: 1rem;
 }
 
+/* CategoryList Styles */
+.category-list {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.loading, .no-data {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  padding: 2rem;
+}
+
+.category-info {
+  display: flex;
+  font-weight: bold;
+  padding: 0.5rem 0;
+}
+
+.category-name, .category-type {
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+
+.category-type {
+  font-style: italic;
+  color: #666;
+  align-self: start;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: white;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.category-item:hover {
+  background-color: #f7f7f7;
+}
+
+/* New layout for category-info and category-actions */
+.category-info {
+  flex: 1; /* Takes up 50% of the space */
+  display: flex;
+  gap: 5rem;
+  margin-left: 3rem;
+}
+
+.category-actions {
+  flex: 0.5; /* Takes up the remaining 50% */
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.edit-button, .delete-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.edit-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #45a049;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #e53935;
+}
+
+.edit-button:disabled,
+.delete-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .category-info {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .category-actions {
+      margin-top: 1rem;
+      justify-content: flex-start;
+  }
+
+  /* Stack category-info and category-actions on small screens */
+  .category-item {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .category-actions {
+      width: 100%;
+  }
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .main-content {
