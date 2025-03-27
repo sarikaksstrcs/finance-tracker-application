@@ -10,6 +10,7 @@ import TransactionForm from "./TransactionForm";
 import TransactionList from "./TransactionList";
 import TransactionFilters from "./TransactionFilters";
 import Summary from "./Summary";
+import { format } from "date-fns";
 import { Line } from "react-chartjs-2"; // Import chart.js
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -110,7 +111,10 @@ export const TransactionManager: React.FC = () => {
     const expenseData = transactionsData?.transactions?.filter(
         (transaction) => transaction.type === "expense"
     );
-    const expenseDates = expenseData?.map((transaction) => transaction.date);
+    const expenseDates = expenseData?.map((transaction) =>
+        format(new Date(transaction.date), "dd/MM/yyyy")
+      );
+      
     const expenseAmounts = expenseData?.map((transaction) => transaction.amount);
 
     const chartData = {
