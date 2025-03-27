@@ -21,7 +21,7 @@ const LoginPage: React.FC = () => {
     return (
         <div className="auth-page">
             <div className="auth-container">
-                <h1>Login to Finance Tracker</h1>
+                <h1 style={{textAlign:"center"}}>Track Your Finance</h1>
                 <LoginForm />
                 <div className="auth-links">
                     <p>
