@@ -146,16 +146,40 @@ export const TransactionManager: React.FC = () => {
     const totalIncome = incomeData?.reduce((sum, transaction) => sum + transaction.amount, 0);
     const totalExpense = expenseData?.reduce((sum, transaction) => sum + transaction.amount, 0);
 
-    const pieChartData = {
-        labels: ["Income", "Expenses"],
-        datasets: [
-            {
-                data: [totalIncome, totalExpense],
-                backgroundColor: ["#4caf50", "#f44336"], // Green for Income, Red for Expenses
-                hoverBackgroundColor: ["#45a049", "#e53935"],
-            },
-        ],
-    };
+// Group expenses by category
+const expenseCategories = expenseData?.reduce((acc: any, transaction) => {
+    console.log(transaction.category.name);
+    
+    if (!acc[transaction.category.name]) {
+        acc[transaction.category.name] = 0;
+    }
+    acc[transaction.category.name] += transaction.amount;
+    console.log(acc);
+    
+    return acc;
+}, {});
+
+// Prepare data for the pie chart
+const expenseCategoriesLabels = Object.keys(expenseCategories || {});
+const expenseCategoriesAmounts = Object.values(expenseCategories || {});
+
+// Pie Chart Data (Categories of Expenses)
+const pieChartData = {
+    labels: expenseCategoriesLabels, // Categories as labels
+    datasets: [
+        {
+            data: expenseCategoriesAmounts, // Amounts for each category
+            backgroundColor: [
+                "#f44336", "#2196F3", "#FFEB3B", "#9C27B0", "#FF9800", 
+                "#4CAF50", "#795548", "#E91E63", "#00BCD4", "#8BC34A"
+            ], // Different colors for each category
+            hoverBackgroundColor: [
+                "#e53935", "#1976D2", "#FBC02D", "#7B1FA2", "#F57C00",
+                "#388E3C", "#6D4C41", "#D81B60", "#0097A7", "#7CB342"
+            ],
+        },
+    ],
+};
 
     return (
         <div className="transaction-manager">
@@ -220,19 +244,22 @@ export const TransactionManager: React.FC = () => {
 
             {/* Expense Line Chart */}
             <div className="section">
-                <h2>Expenses Chart</h2>
-                <div className="chart-container">
-                    <Line data={chartData} />
+                <h2>Charts</h2>
+                <div className="charts-container">
+                    {/* Expense Line Chart */}
+                    <div className="chart-container">
+                        <h3>Expenses Chart</h3>
+                        <Line data={chartData} />
+                    </div>
+
+                    {/* Income vs Expense Pie Chart */}
+                    <div className="pie-chart-container">
+                        <h3>Category-Wise Expense</h3>
+                        <Pie data={pieChartData} />
+                    </div>
                 </div>
             </div>
 
-            {/* Income vs Expense Pie Chart */}
-            <div className="section">
-                <h2>Income vs Expense</h2>
-                <div className="chart-container">
-                    <Pie data={pieChartData} />
-                </div>
-            </div>
         </div>
     );
 };

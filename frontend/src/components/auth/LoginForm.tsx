@@ -32,31 +32,35 @@ export const LoginForm: React.FC = () => {
             <h2>Login</h2>
             {error && <div className="error-message">{error}</div>}
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
+                <div className="login-form-group">
                     <label htmlFor="email">Email</label>
                     <input
                         id="email"
                         type="email"
                         value={email}
+                        className="login-input"
                         onChange={(e) => setEmail(e.target.value)}
                         required
                         disabled={isLoading}
                     />
                 </div>
-                <div className="form-group">
+                <div className="login-form-group">
                     <label htmlFor="password">Password</label>
                     <input
                         id="password"
                         type="password"
                         value={password}
+                        className="login-input"
                         onChange={(e) => setPassword(e.target.value)}
                         required
                         disabled={isLoading}
                     />
                 </div>
-                <button type="submit" disabled={isLoading}>
-                    {isLoading ? "Logging in..." : "Login"}
-                </button>
+                <div className="login-form-group">
+                    <button type="submit" disabled={isLoading} className="login-button">
+                        {isLoading ? "Logging in..." : "Login"}
+                    </button>
+                </div>
             </form>
         </div>
     );

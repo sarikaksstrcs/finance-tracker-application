@@ -78,6 +78,7 @@ body {
   margin-bottom: 1rem;
 }
 
+
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
@@ -573,6 +574,100 @@ button:disabled {
   flex-direction: column;
   width: 48%; /* Each form group takes up 48% of the row */
 }
+.login-form-group{
+  width: 100%;
+}
+/* Main wrapper for the login form */
+.auth-form {
+  max-width: 400px; /* Limit width */
+  margin: 50px auto; /* Center the form */
+  padding: 30px; /* Add padding around the form */
+  background-color: #fff; /* White background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  font-family: Arial, sans-serif; /* Use a clean font */
+}
+
+/* Heading style */
+.auth-form h2 {
+  font-size: 24px;
+  margin-bottom: 20px; /* Add space below heading */
+  color: #333; /* Dark color for heading */
+  text-align: center; /* Center the title */
+}
+
+/* Error message styling */
+.error-message {
+  color: #e74c3c; /* Red color for error */
+  background-color: #f8d7da; /* Light red background */
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px; /* Add some space between error and form fields */
+  text-align: center;
+  font-size: 14px; /* Smaller text size */
+}
+
+
+/* Label styling */
+.login-form-group label {
+  display: block; /* Make label block-level */
+  font-size: 14px; /* Smaller font size */
+  color: #555; /* Gray color */
+  margin-bottom: 5px; /* Add space between label and input */
+  font-weight: bold;
+}
+
+/* Input fields styling */
+.login-input {
+  width: 100%; /* Make input take full width */
+  padding: 10px; /* Add padding inside input */
+  font-size: 14px; /* Slightly smaller font size */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+  box-sizing: border-box; /* Include padding in the width */
+  background-color: #f9f9f9; /* Light background for inputs */
+  color: #333; /* Dark text for readability */
+  transition: border-color 0.3s; /* Smooth transition for border on focus */
+}
+
+/* Input focus state */
+.login-input:focus {
+  border-color: #007bff; /* Blue border on focus */
+  outline: none; /* Remove the default focus outline */
+  background-color: #fff; /* White background on focus */
+}
+
+/* Button styling */
+.login-button {
+  width: 95%; /* Make button full width */
+  padding: 12px;
+  font-size: 16px; /* Larger font size */
+  background-color: #007bff; /* Blue button */
+  color: #fff; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition for hover */
+  align-self: center;
+  margin-left: 10px;
+}
+
+/* Button hover state */
+.login-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Disabled button styling */
+.login-button:disabled {
+  background-color: #ccc; /* Grey background when disabled */
+  cursor: not-allowed; /* Change cursor to indicate it's disabled */
+}
+
+/* Disabled input field styling */
+.login-input:disabled {
+  background-color: #e9ecef; /* Light gray background for disabled fields */
+}
+
 
 .form-group label {
   font-size: 14px;
@@ -636,6 +731,36 @@ button:disabled {
 
 }
 
+.charts-container {
+  display: flex;
+  justify-content: space-around; /* Space between the charts */
+  gap: 20px; /* Optional: Adds some space between the charts */
+}
+
+.chart-container {
+  width: 48%; /* Each chart takes up 48% of the container width */
+  box-sizing: border-box; /* Ensures padding/borders don't affect width */
+}
+.pie-chart-container {
+  width: 30%; /* Each chart takes up 48% of the container width */
+  box-sizing: border-box; /* Ensures padding/borders don't affect width */
+
+}
+
+.chart-container h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .charts-container {
+      flex-direction: column; /* Stack charts vertically on small screens */
+  }
+
+  .chart-container {
+      width: 100%; /* Full width for each chart on small screens */
+  }
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
