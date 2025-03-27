@@ -40,53 +40,57 @@ export const RegisterForm: React.FC = () => {
             <h2>Register</h2>
             {error && <div className="error-message">{error}</div>}
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
+                <div className="login-form-group">
                     <label htmlFor="name">Name</label>
                     <input
                         id="name"
                         type="text"
                         value={name}
+                        className="login-input"
                         onChange={(e) => setName(e.target.value)}
                         required
                         disabled={isLoading}
                     />
                 </div>
-                <div className="form-group">
+                <div className="login-form-group">
                     <label htmlFor="email">Email</label>
                     <input
                         id="email"
                         type="email"
                         value={email}
+                        className="login-input"
                         onChange={(e) => setEmail(e.target.value)}
                         required
                         disabled={isLoading}
                     />
                 </div>
-                <div className="form-group">
+                <div className="login-form-group">
                     <label htmlFor="password">Password</label>
                     <input
-                        id="password"
+                        
                         type="password"
                         value={password}
+                        className="login-input"
                         onChange={(e) => setPassword(e.target.value)}
                         required
                         disabled={isLoading}
                         minLength={6}
                     />
                 </div>
-                <div className="form-group">
+                <div className="login-form-group">
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input
                         id="confirmPassword"
                         type="password"
                         value={confirmPassword}
+                        className="login-input"
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                         disabled={isLoading}
                         minLength={6}
                     />
                 </div>
-                <button type="submit" disabled={isLoading}>
+                <button type="submit" disabled={isLoading} className="login-button">
                     {isLoading ? "Registering..." : "Register"}
                 </button>
             </form>
