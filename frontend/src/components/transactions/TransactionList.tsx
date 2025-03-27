@@ -65,7 +65,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                         <button
                             onClick={() => onDelete(transaction._id!)}
                             disabled={isLoading}
-                            className="delete-button"
+                            className="reset-button"
                         >
                             Delete
                         </button>
