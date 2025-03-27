@@ -319,6 +319,44 @@ button:disabled {
   }
 }
 
+/* Base styles for the amount */
+.amount {
+  font-size: 1.2rem; /* Adjust font size */
+  font-weight: bold; /* Make the amount bold */
+  display: inline-block; /* Inline-block to fit within the line */
+  margin: 0;
+  padding: 10px 15px; /* Add padding for spacing */
+  border-radius: 5px; /* Rounded corners */
+  transition: all 0.3s ease; /* Smooth transition for color changes */
+}
+
+/* Styles when the balance is positive */
+.amount.positive {
+  background-color: #d4edda; /* Light green background for positive balance */
+  color: #155724; /* Dark green text for positive balance */
+}
+
+/* Styles when the balance is negative */
+.amount.negative {
+  background-color: #f8d7da; /* Light red background for negative balance */
+  color: #721c24; /* Dark red text for negative balance */
+}
+
+/* Styling for the balance type text (Credit/Deficit) */
+.balance-type {
+  font-size: 0.9rem; /* Smaller text size */
+  font-weight: normal; /* Regular font weight */
+  margin-left: 5px; /* Add some space between amount and balance-type */
+  text-transform: uppercase; /* Make the text uppercase */
+  opacity: 0.8; /* Slightly reduced opacity for the balance type */
+}
+
+/* Hover effect for the amount */
+.amount:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  cursor: pointer; /* Show a pointer cursor on hover */
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -338,3 +376,4 @@ button:disabled {
     grid-template-columns: 1fr;
   }
 }
+
