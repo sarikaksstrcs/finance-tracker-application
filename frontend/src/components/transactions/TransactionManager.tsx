@@ -11,10 +11,10 @@ import TransactionList from "./TransactionList";
 import TransactionFilters from "./TransactionFilters";
 import Summary from "./Summary";
 import { format } from "date-fns";
-import { Line } from "react-chartjs-2"; // Import chart.js
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import { Line, Pie } from "react-chartjs-2"; // Import chart.js components
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 
-// Register chart.js components
+// Register chart.js components for Line and Pie charts
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -22,7 +22,8 @@ ChartJS.register(
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    ArcElement // Register ArcElement for Pie Chart
 );
 
 export const TransactionManager: React.FC = () => {
@@ -107,16 +108,20 @@ export const TransactionManager: React.FC = () => {
         createMutation.isLoading ||
         deleteMutation.isLoading;
 
-    // Chart.js data preparation for expenses
+    // Chart.js data preparation for expenses and income
     const expenseData = transactionsData?.transactions?.filter(
         (transaction) => transaction.type === "expense"
     );
+    const incomeData = transactionsData?.transactions?.filter(
+        (transaction) => transaction.type === "income"
+    );
     const expenseDates = expenseData?.map((transaction) =>
         format(new Date(transaction.date), "dd/MM/yyyy")
-      );
-      
+    );
     const expenseAmounts = expenseData?.map((transaction) => transaction.amount);
+    const incomeAmounts = incomeData?.map((transaction) => transaction.amount);
 
+    // Line Chart Data
     const chartData = {
         labels: expenseDates, // Dates for the x-axis
         datasets: [
@@ -126,6 +131,28 @@ export const TransactionManager: React.FC = () => {
                 borderColor: "rgba(255, 99, 132, 1)",
                 backgroundColor: "rgba(255, 99, 132, 0.2)",
                 tension: 0.1,
+            },
+            {
+                label: "Income",
+                data: incomeAmounts, // Amounts for the y-axis
+                borderColor: "rgb(10, 99, 59)",
+                backgroundColor: "rgba(5, 58, 34, 0.2)",
+                tension: 0.1,
+            },
+        ],
+    };
+
+    // Pie Chart Data (Total income vs total expenses)
+    const totalIncome = incomeData?.reduce((sum, transaction) => sum + transaction.amount, 0);
+    const totalExpense = expenseData?.reduce((sum, transaction) => sum + transaction.amount, 0);
+
+    const pieChartData = {
+        labels: ["Income", "Expenses"],
+        datasets: [
+            {
+                data: [totalIncome, totalExpense],
+                backgroundColor: ["#4caf50", "#f44336"], // Green for Income, Red for Expenses
+                hoverBackgroundColor: ["#45a049", "#e53935"],
             },
         ],
     };
@@ -191,11 +218,19 @@ export const TransactionManager: React.FC = () => {
                 )}
             </div>
 
-            {/* Expense Chart */}
+            {/* Expense Line Chart */}
             <div className="section">
                 <h2>Expenses Chart</h2>
                 <div className="chart-container">
                     <Line data={chartData} />
+                </div>
+            </div>
+
+            {/* Income vs Expense Pie Chart */}
+            <div className="section">
+                <h2>Income vs Expense</h2>
+                <div className="chart-container">
+                    <Pie data={pieChartData} />
                 </div>
             </div>
         </div>
