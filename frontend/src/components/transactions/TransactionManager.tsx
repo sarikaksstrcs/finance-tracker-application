@@ -10,6 +10,19 @@ import TransactionForm from "./TransactionForm";
 import TransactionList from "./TransactionList";
 import TransactionFilters from "./TransactionFilters";
 import Summary from "./Summary";
+import { Line } from "react-chartjs-2"; // Import chart.js
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+
+// Register chart.js components
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
 
 export const TransactionManager: React.FC = () => {
     const queryClient = useQueryClient();
@@ -93,6 +106,26 @@ export const TransactionManager: React.FC = () => {
         createMutation.isLoading ||
         deleteMutation.isLoading;
 
+    // Chart.js data preparation for expenses
+    const expenseData = transactionsData?.transactions?.filter(
+        (transaction) => transaction.type === "expense"
+    );
+    const expenseDates = expenseData?.map((transaction) => transaction.date);
+    const expenseAmounts = expenseData?.map((transaction) => transaction.amount);
+
+    const chartData = {
+        labels: expenseDates, // Dates for the x-axis
+        datasets: [
+            {
+                label: "Expenses",
+                data: expenseAmounts, // Amounts for the y-axis
+                borderColor: "rgba(255, 99, 132, 1)",
+                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                tension: 0.1,
+            },
+        ],
+    };
+
     return (
         <div className="transaction-manager">
             {error && <div className="error-message">{error}</div>}
@@ -152,6 +185,14 @@ export const TransactionManager: React.FC = () => {
                         </button>
                     </div>
                 )}
+            </div>
+
+            {/* Expense Chart */}
+            <div className="section">
+                <h2>Expenses Chart</h2>
+                <div className="chart-container">
+                    <Line data={chartData} />
+                </div>
             </div>
         </div>
     );
